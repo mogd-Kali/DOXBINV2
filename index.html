@@ -1,323 +1,230 @@
-
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="ru">
 <head>
-    <title>Doxbin V2</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кликалка с улучшениями и сохранением в Cookie</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(to bottom, #e0eafc, #cfdef3);
+            color: #333;
+            padding: 20px;
+            box-sizing: border-box;
+        }
 
-   
+        #counter {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #555;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
 
-   
-    
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        #clickImage {
+            width: 150px;
+            height: 150px;
+            cursor: pointer;
+            border-radius: 50%;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            border: 3px solid #fff;
+        }
 
-<style> 
-    
-        body,
-        p {
-            background-color: #060606;
+        #clickImage:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        #clickImage:active {
+            transform: scale(0.9);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        #upgrades {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 100%;
+        }
+
+        .upgrade-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 5px;
+            background-color: #5cb85c;
             color: white;
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
         }
 
-        td,
-        tr,
-        tbody {
-            background-color: #060606;
+        .upgrade-button:hover {
+            background-color: #449d44;
+            transform: translateY(-2px);
+        }
+
+        .upgrade-button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .upgrade-button:disabled {
+            background-color: #999;
+            cursor: not-allowed;
+            color: #ddd;
+            box-shadow: none;
+        }
+
+        #message {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #777;
+            text-align: center;
+        }
+
+        #telegramButton {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #0088cc;
             color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
         }
 
-        /* Custom CSS to fix messed up table colors */
-        .table>tfoot>tr>th,
-        .table>tfoot>tr>td {
-            border-top-color: rgb(108, 100, 88);
-        }
-
-        .table-striped tbody>tr:nth-child(2n+1)>td,
-        .table-striped tbody>tr:nth-child(2n+1)>th {
-            background-color: rgb(23, 25, 26);
-        }
-
-        .table-striped tbody>tr:nth-child(2n)>td,
-        .table-striped tbody>tr:nth-child(2n)>th {
-            background-color: #0f0f0f;
-        }
-
-        .table>tfoot>tr>th,
-        .table>tfoot>tr>td {
-            line-height: 1.42857;
-            vertical-align: top;
-            padding: 8px;
-            border-top: 1px solid rgb(40, 40, 40);
-        }
-
-        
-        ::-webkit-scrollbar {
-            background-color: #1b1e1f;
-            color: #918b82;
-        }
-
-        ::-webkit-scrollbar-corner {
-            background-color: #141617;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background-color: #3b3f41;
+        #telegramButton.disabled {
+            background-color: #999;
+            cursor: not-allowed;
         }
     </style>
- 
-   
-    
- 
 </head>
-
 <body>
+    <div id="counter">Счет: 0</div>
+    <img id="clickImage" src="https://cdn1.iconfinder.com/data/icons/outlined-input-icons-gestures/200/signs_click_here-1024.png" alt="Кнопка">
 
-
-
-
-
-  <style>
-   .fig {
-    text-align: center; 
-   }
-  </style>
- </head>
- <body>
- 
-  <p class="fig"><img src="ico.png" 
-   width="500" height="500" alt="Фотография"></p>
-
-
-
-
-
-    <div class="col-md-12">
-        <div class="col-md-12" style="margin-top: 60px;float:none;">
-            <div align="center">
-
-                <pre
-                    style="font: 4px/6px monospace; background-color: #060606; overflow-x: hidden; overflow-y: hidden; border: none; color: white;">
-             
-                </pre>
-
-                <h5 class="announcement a-1" style="color:#00AAFF;">
-                    <u>
-                        <a style="color:inherit;" href="index.html">
-                            Doxbin V2
-                        </a>
-                    </u>
-                </h5>
-
-
-
-
-<h5 class="announcement a-1" style="color:#00AAFF;">
-                    <u>
-                        <a style="color:inherit;" href="rules.md">
-                            rules 
-                        </a>
-                    </u>
-                </h5>
-
-
-
-
-
-
-                <h5 class="announcement a-2" style="color:#08EFFF;">
-                    <u>
-                        <a style="color:inherit;" href="https://t.me/+eD7dNtINV7k5NDMy">
-                           telegram official 
-                        </a>
-                    </u>
-                </h5>
-
-
-                <h5 class="announcement a-2" style="color:#00AAFF;">
-                    <u>
-                        <a style="color:inherit;" href="pages.php">
-                            
-                        </a>
-                    </u>
-                </h5>
-
-                <br>
-
-            </div>
-        </div>
-
-        <div class="col-md-7" style="float:none;margin:auto;padding:0;">
-            
-  
-
-
-
-
-            <h6 style="margin-top: 14px; color: white;">Public Pastes</h6>
-            
-            <table class="table table-striped table-hover" style="margin-top: 0px;">
-                <thead>
-                    <tr>
-                        <th colspan="3">Title</th>
-                        <th class="clickable text-center auto-size" id="commentsorder" style="width: 105px;">
-                            By
-                        </th>
-                        <th class="clickable text-center auto-size" id="viewsorder">Date</th>
-                        <th colspan="2" class="text-center">Time</th>
-                        <th class="clickable text-center r-hide" id="dateorder" style="width: 120px">Size</th>
-                    </tr>
-                </thead>
-                <tbody>
-
-
-                    
-
-
-<td colspan="3" style="overflow: hidden;text-overflow: ellipsis;">
-                            <a title="RE UPLOAD lethal 0001 aka catboybailey"
-                                href="79015315707.txt">
-                                79015315707
-                            </a>
-                        </td>
-                        <td style="width: 105px;" class="text-center">
-      <div style="color:red;">
-                           Mogd
-                        </td>
-                        <td class="text-center">
-                           07.02.2025
-                        </td>
-                        <td colspan="2" style="padding-bottom: 0; max-width: 140px;" class="text-center">
-                           11:03
-                        </td>
-                        <td style="width: 120px" class="text-center r-hide">
-                            0.2 KB
-                        </td>
-                    </tr>
-
-
-<td colspan="3" style="overflow: hidden;text-overflow: ellipsis;">
-                            <a title="RE UPLOAD lethal 0001 aka catboybailey"
-                                href="79025795513.txt">
-                                79025795513
-                            </a>
-                        </td>
-                        <td style="width: 105px;" class="text-center">
-      <div style="color:red;">
-                           mogd
-                        </td>
-                        <td class="text-center">
-                           07.02.2025
-                        </td>
-                        <td colspan="2" style="padding-bottom: 0; max-width: 140px;" class="text-center">
-                           11:05
-                        </td>
-                        <td style="width: 120px" class="text-center r-hide">
-                            1 KB
-                        </td>
-                    </tr>
-
-
-
-
-<td colspan="3" style="overflow: hidden;text-overflow: ellipsis;">
-                            <a title="RE UPLOAD lethal 0001 aka catboybailey"
-                                href="79867867098.txt">
-                                79867867098
-                            </a>
-                        </td>
-                        <td style="width: 105px;" class="text-center">
-      <div style="color:red;">
-                           Mogd
-                        </td>
-                        <td class="text-center">
-                           07.02.2025
-                        </td>
-                        <td colspan="2" style="padding-bottom: 0; max-width: 140px;" class="text-center">
-                           11:17
-                        </td>
-                        <td style="width: 120px" class="text-center r-hide">
-                            1 KB
-                        </td>
-                    </tr>
-
-<td colspan="3" style="overflow: hidden;text-overflow: ellipsis;">
-                            <a title="RE UPLOAD lethal 0001 aka catboybailey"
-                                href="79210550166.txt">
-                                79210550166
-                            </a>
-                        </td>
-                        <td style="width: 105px;" class="text-center">
-      <div style="color:red;">
-                           Mogd
-                        </td>
-                        <td class="text-center">
-                           07.02.2025
-                        </td>
-                        <td colspan="2" style="padding-bottom: 0; max-width: 140px;" class="text-center">
-                           19:40
-                        </td>
-                        <td style="width: 120px" class="text-center r-hide">
-                            1 KB
-                        </td>
-                    </tr>
-
-<td colspan="3" style="overflow: hidden;text-overflow: ellipsis;">
-                            <a title="RE UPLOAD lethal 0001 aka catboybailey"
-                                href="79006660983.txt">
-                                79006660983
-                            </a>
-                        </td>
-                        <td style="width: 105px;" class="text-center">
-      <div style="color:red;">
-                           Mogd
-                        </td>
-                        <td class="text-center">
-                           07.02.2025
-                        </td>
-                        <td colspan="2" style="padding-bottom: 0; max-width: 140px;" class="text-center">
-                           19:42
-                        </td>
-                        <td style="width: 120px" class="text-center r-hide">
-                            1 KB
-                        </td>
-                    </tr>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                </tbody>
-            </table>
-        </div>
-    </div>
-    
-    <div class="center">
-        <a href="#">Back to top</a>
-        <br><br>
+    <div id="upgrades">
+        <button class="upgrade-button" id="doubleClick">Купить x2 клик (50)</button>
+        <!-- Добавьте больше улучшений по аналогии -->
     </div>
 
-<div class="center">
-        <a href="vvknbbvvikbvfjknccfuhv@gmail.com">add information </a>
-        <br><br>
-    </div>
+    <button id="telegramButton">Подписаться на Telegram канал</button>
 
+    <div id="message"></div>
 
+    <script>
+        // Функция для установки cookie
+        function setCookie(name, value, days) {
+            let expires = "";
+            if (days) {
+                let date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+            document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+        }
 
+        // Функция для получения cookie
+        function getCookie(name) {
+            let nameEQ = name + "=";
+            let ca = document.cookie.split(';');
+            for(let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
 
-<small>version 2.9 by mogd </small>
+        let count = parseInt(getCookie('clickerCount') || 0);
+        let clickValue = parseFloat(getCookie('clickValue') || 1); // Добавлено значение клика
+        let telegramRewardGiven = getCookie('telegramRewardGiven') === 'true'; // Проверяем, был ли уже выдан бонус
+        let thousandRewardGiven = getCookie('thousandRewardGiven') === 'true'; // Проверяем, был ли бонус за 1000
+        const counterElement = document.getElementById('counter');
+        const clickImage = document.getElementById('clickImage');
+        const doubleClickButton = document.getElementById('doubleClick');
+        const telegramButton = document.getElementById('telegramButton');
+        const messageElement = document.getElementById('message');
 
+        // Обновляем счетчик при загрузке страницы
+        counterElement.textContent = 'Счет: ' + count;
+
+        // Если награда за Telegram уже выдана, отключаем кнопку
+        if (telegramRewardGiven) {
+            telegramButton.textContent = 'Вы уже подписались!';
+            telegramButton.classList.add('disabled');
+            telegramButton.disabled = true;
+        }
+
+        // Если уже получили x2 за 1000, сообщаем об этом
+        if (thousandRewardGiven) {
+            messageElement.textContent = 'Вы уже получили x2 за 1000 монет!';
+        }
+
+        clickImage.addEventListener('click', function() {
+            count += clickValue; // Увеличиваем на значение клика
+            counterElement.textContent = 'Счет: ' + count;
+            setCookie('clickerCount', count, 365); // Сохраняем счет
+
+            // Проверяем, достигли ли 1000 и не получали ли бонус
+            if (count >= 1000 && !thousandRewardGiven) {
+                clickValue *= 2; // Удваиваем значение клика
+                setCookie('clickValue', clickValue, 365); // Сохраняем значение клика
+                setCookie('thousandRewardGiven', 'true', 365); // Отмечаем, что бонус получен
+                thousandRewardGiven = true;
+
+                messageElement.textContent = 'Вы достигли 1000 монет и получили x2!';
+                setTimeout(() => messageElement.textContent = '', 3000);
+            }
+        });
+
+        doubleClickButton.addEventListener('click', function() {
+            if (count >= 50) {
+                count -= 50;
+                clickValue *= 2; // Удваиваем значение клика
+                counterElement.textContent = 'Счет: ' + count;
+                setCookie('clickerCount', count, 365); // Сохраняем счет
+                setCookie('clickValue', clickValue, 365); // Сохраняем значение клика
+                messageElement.textContent = 'Клик x2 успешно куплен!';
+                setTimeout(() => messageElement.textContent = '', 3000); // Очищаем сообщение через 3 секунды
+            } else {
+                messageElement.textContent = 'Недостаточно очков!';
+                setTimeout(() => messageElement.textContent = '', 3000); // Очищаем сообщение через 3 секунды
+            }
+        });
+
+        telegramButton.addEventListener('click', function() {
+            if (!telegramRewardGiven) {
+                // Открываем ссылку на Telegram канал в новой вкладке
+                window.open('https://t.me/SendCalc', '_blank');
+
+                // Добавляем 900 монет
+                count += 900;
+                counterElement.textContent = 'Счет: ' + count;
+                setCookie('clickerCount', count, 365); // Сохраняем счет
+
+                // Отключаем кнопку и меняем текст
+                telegramButton.textContent = 'Вы уже подписались!';
+                telegramButton.classList.add('disabled');
+                telegramButton.disabled = true;
+
+                // Устанавливаем cookie, что награда выдана
+                setCookie('telegramRewardGiven', 'true', 365);
+                telegramRewardGiven = true;
+
+                messageElement.textContent = 'Вы получили 900 монет за подписку!';
+                setTimeout(() => messageElement.textContent = '', 3000); // Очищаем сообщение через 3 секунды
+            }
+        });
+    </script>
 </body>
-
 </html>
-
